@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="iti_track_form_view" model="ir.ui.view">
+            <field name="name">Skill Form View</field>
+            <field name="model">iti.skill</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="student_ids" widget="many2many_tags" string="Students who have "/>
+                        </group>
+<!--                        <notebook>-->
+<!--                            <page string="Student who have">-->
+<!--                                <field name="student_ids"/>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="iti_skill_action" model="ir.actions.act_window">
+            <field name="name">Skills</field>
+            <field name="res_model">iti.skill</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="iti_skill_menu" name="Skills" parent="iti_manager" action="iti_skill_action"/>
+    </data>
+</odoo>

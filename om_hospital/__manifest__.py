@@ -1,0 +1,35 @@
+{
+    'name': 'Hospital Management System',
+    'version': '1.0.0',
+    'category': 'Hospital',
+    'author': 'Usama Aldaifii',
+    'sequence': -100,
+    'summary': 'Hospital Management System',
+    'description': """
+This module Hospital Management System Test .
+    """,
+    'depends': ['mail', 'product', 'report_xlsx'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/patient_tag_data.xml',
+        'data/patient.tag.csv',
+        'data/sequence_data.xml',
+        'wizard/cancel_appointment.xml',
+        'views/patient_view.xml',
+        'views/appointment_view.xml',
+        'views/female_patient_view.xml',
+        'views/male_patient_view.xml',
+        'views/menu.xml',
+        'views/operation_view.xml',
+        'views/patient_tag.xml',
+        'views/res_config_settings_views.xml',
+        'report/patient_details_temp.xml',
+        'report/patient_card.xml',
+        'report/reports.xml'
+    ],
+    'demo': [],
+    'application': True,
+    'installable': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

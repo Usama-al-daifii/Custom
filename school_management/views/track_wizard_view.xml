@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+
+        <record id="iti_track_form_wizard_view" model="ir.ui.view">
+            <field name="name">Track Wizard Form View</field>
+            <field name="model">iti.track.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <footer>
+                            <button name="save_track_values" type="object" string="Create New Track"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="iti_track_wizard_action" model="ir.actions.act_window">
+            <field name="name"> Wizard Tracks</field>
+            <field name="res_model">iti.track.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+
+        </record>
+
+
+    </data>
+</odoo>
