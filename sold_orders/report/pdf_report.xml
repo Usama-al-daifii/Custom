@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_sold_orders" model="report.paperformat">
+            <field name="name">Sold_Orders</field>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">25</field>
+            <field name="margin_right">25</field>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="action_report_sold_orders_pdf" model="ir.actions.report">
+            <field name="name">Sold Orders PDF Report</field>
+            <field name="model">reporting.sold.orders</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sold_orders.report_sold_orders_pdf_temp</field>
+            <field name="report_file">sold_orders.report_sold_orders_pdf_temp</field>
+            <field name="binding_model_id" ref="model_reporting_sold_orders"/>
+            <field name="paperformat_id" ref="sold_orders.paperformat_sold_orders"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_sold_orders_pdf_temp">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-set="sold_orders" t-value="env['sale.order'].browse(sold_orders)"/>
+                    <t t-set="sold_orders_lines" t-value="sold_orders.mapped('order_line').sorted('order_id')"/>
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="text-center">
+                            <h1>Sold Orders Information</h1>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            <div class="text-center">
+                                                <h4>Sold Order Period:</h4>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>Date From</strong>
+                                        </td>
+                                        <td>:</td>
+                                        <td>
+                                            <t t-esc="date_from"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Date To</strong>
+                                        </td>
+                                        <td>:</td>
+                                        <td>
+                                            <t t-esc="date_to"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table style="width:100%;margin-top:10px" class="table" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Order Number
+                                        </th>
+                                        <th>
+                                            Customer
+                                        </th>
+                                        <th>
+                                            Order Date
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="sold_orders" t-as="so">
+                                        <td>
+                                            <span t-esc="so.name"></span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="so.partner_id.name"></span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="so.date_order.date()"></span>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h1>Top 3 Products :</h1>
+                            <table style="width:100%;margin-top:10px" class="table" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product
+                                        </th>
+                                        <th>
+                                            Quantity
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="top_3_products" t-as="product_dict">
+                                        <td>
+                                            <span t-esc="product_dict.get('product')"></span>
+                                        </td>
+                                        <td>
+                                            <span t-esc="product_dict.get('product_tot_qty')"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <!--                <template id="custom_report_external_layout">-->
+        <!--                    <t t-if="not o" t-set="o" t-value="docs"/>-->
+        <!--                    <t t-set="company" t-value="company_id"/>-->
+        <!--                    <div class="header">-->
+        <!--                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo"-->
+        <!--                             class="float-left"/>-->
+        <!--                        <div style="font-size:12px;text-align:left;" class="float-right">-->
+        <!--                            <div>-->
+        <!--                                <strong t-field="o.company_id.partner_id.name"/>-->
+        <!--                                <span t-field="o.company_id.partner_id"-->
+        <!--                                      t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>-->
+        <!--                                <span t-field="o.company_id.partner_id.website"/>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"-->
+        <!--                         t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+        <!--                        <t t-call="web.address_layout"/>-->
+        <!--                        <t t-raw="0"/>-->
+        <!--                    </div>-->
+        <!--                </template>-->
+
+    </data>
+</odoo>

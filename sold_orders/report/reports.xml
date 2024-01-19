@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+
+        <record id="action_report_sold_orders_xls" model="ir.actions.report">
+            <field name="name">Sold Orders EXCEL Report</field>
+            <field name="model">reporting.sold.orders</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">sold_orders.report_sold_orders_xlsx_temp</field>
+            <field name="report_file">sold_orders.report_sold_orders_xlsx_temp</field>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

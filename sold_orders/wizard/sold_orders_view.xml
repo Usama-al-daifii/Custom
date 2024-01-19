@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sold_orders_reporting_view_form" model="ir.ui.view">
+            <field name="name">sold_orders_reporting_form</field>
+            <field name="model">reporting.sold.orders</field>
+            <field name="arch" type="xml">
+                <form string="Sold Orders">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from"/>
+
+                            </group>
+                            <group>
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                    <footer>
+                        <button name="get_pdf_report" type="object" string="PDF Report" class="btn-primary"/>
+                        <button name="get_excel_report" type="object" class="oe_highlight" string="EXCEL Report"/>
+                        <button special="cancel" data-hotkey="z" class="btn-secondary" string="Discard"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="sold_orders_reporting_action" model="ir.actions.act_window">
+            <field name="name">Sold Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">reporting.sold.orders</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="sold_orders_reporting_menu"
+                  name="Sold Orders Reporting"
+                  parent="sale.menu_sale_report"
+                  action="sold_orders_reporting_action"
+                  sequence="10"/>
+
+    </data>
+</odoo>
